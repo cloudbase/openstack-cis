@@ -36,8 +36,6 @@ local_conf:
     - cinder
     - c-api
     - c-sch
-    - c-vol
-    - c-bak
     - s-proxy
     - s-object
     - s-container
@@ -55,6 +53,8 @@ local_conf:
     - tempest
 
   disable_services:
+    - c-bak
+    - c-vol
     - n-obj
     - n-novnc
     - n-net
