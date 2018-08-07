@@ -27,8 +27,8 @@ services:
     name: cinder-backup
     description: OpenStack Cinder Backup Service
     binary: "{{ win_dir.python }}\\scripts\\cinder-backup.exe"
-    config: "{{ win_dir.etc }}\\cinder.conf"
-    template: cinder.conf
+    config: "{{ win_dir.etc }}\\cinder-backup.conf"
+    template: cinder-backup.conf
 
 python_packages:
   - pymysql
