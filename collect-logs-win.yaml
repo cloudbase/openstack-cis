@@ -1,6 +1,6 @@
 - hosts: win2016-compute,win2016-cinder
 
-  vars_files: 
+  vars_files:
     - zuul-params.yaml
 
   tasks:
@@ -17,7 +17,7 @@
     - name: Include variables from group_vars/devstack-{{ zuul_project | basename }}
       include_vars: "group_vars/devstack-{{ zuul_project | basename }}"
       failed_when: False
-      tags: always 
+      tags: always
 
     - name: Include variables from group_vars/devstack-{{ zuul_project | basename }}-{{ job_type }}
       include_vars: "group_vars/devstack-{{ zuul_project | basename }}-{{ job_type }}"
@@ -70,6 +70,15 @@
       failed_when: False
       tags: always
 
+    - name: Add collect-event-log powershell script and fe configs
+      win_template:
+        src: "windows/{{ item }}"
+        dest: "{{ win_dir.event_log }}\\{{ item }}"
+      with_items: ["eventlogcss.txt", "eventlogjs.txt", "collect-event-log.ps1"]
+
+    - name: Execute collect-event-log script
+      win_shell: "{{ win_dir.event_log }}\\collect-event-log.ps1"
+
     - name: Get log files
       shell: |
         if [ ! -d "{{ item.value.dest }}" ];then
@@ -109,5 +118,4 @@
           src: '\openstack\etc'
       ignore_errors: True
       delegate_to: 127.0.0.1
-
 
