@@ -47,7 +47,7 @@
         for u in $(sudo systemctl list-unit-files | grep devstack | awk '{print $1}'); do
             name=$(echo $u | sed 's/devstack@//' | sed 's/\.service//')
             timestamp=$(systemctl show -p ActiveEnterTimestamp $u)
-            sudo journalctl -o short-precise --unit $u --since "$(echo $timestamp | awk '{print $2 $3}' > {{ devstack_dir.stack }}/logs/$name.txt
+            sudo journalctl -o short-precise --unit $u --since "$(echo $timestamp | awk '{print $2 $3}')" > {{ devstack_dir.stack }}/logs/$name.txt
         done
       ignore_errors: True
 
