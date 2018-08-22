@@ -38,7 +38,7 @@ cherry_picks:
   - project: openstack/nova
     path: "{{ win_dir.build }}\\nova"
     patches:
-      - refs/changes/61/585661/1
+      - refs/changes/61/585661/2
 
 compute_driver: hyperv.driver.HyperVDriver
 
