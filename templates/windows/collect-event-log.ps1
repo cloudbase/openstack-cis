@@ -38,9 +38,9 @@ function cleareventlog(){
 }
 
 
-$logPath = "{{ eventlogPath }}"
-$eventlogcsspath = "{{ eventlogcsspath }}"
-$eventlogjspath = "{{ eventlogjspath }}"
+$logPath = "{{ win_dir.event_log }}"
+$eventlogcsspath = "C:\\eventlogcss.txt"
+$eventlogjspath = "C:\\eventlogjs.txt"
 
 dumpeventlog $logPath
 exporthtmleventlog $logPath

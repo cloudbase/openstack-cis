@@ -73,20 +73,20 @@
     - name: Add collect-event-log powershell script and fe configs
       win_template:
         src: "windows/{{ item }}"
-        dest: "{{ win_dir.event_log }}\\{{ item }}"
+        dest: "C:\\{{ item }}"
       with_items: ["eventlogcss.txt", "eventlogjs.txt", "collect-event-log.ps1"]
       failed_when: False
 
     - name: Execute collect-event-log script
-      win_shell: "{{ win_dir.event_log }}\\collect-event-log.ps1"
+      win_shell: "C:\\collect-event-log.ps1"
       failed_when: False
 
     - name: Copy cloudinit logs in log dir
       win_copy:
-        src: "C:\\Program Files\\Cloudbase Solutions\\Cloudbase-Init\\log\\{{ item }}.log"
-        dest: "{{ win_dir.log }}\\{{ item }}.log"
+        src: "C:\\Program Files\\Cloudbase Solutions\\Cloudbase-Init\\log\\{{ item }}"
+        dest: "{{ win_dir.log }}\\{{ item }}"
         remote_src: yes
-      with_items: ["cloudbase-init", "cloudbase-init-unattend"]
+      with_items: ["cloudbase-init.log", "cloudbase-init-unattend.log"]
       failed_when: False
 
     - name: Get log files

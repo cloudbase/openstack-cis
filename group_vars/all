@@ -26,7 +26,3 @@ data_bridge: br-data
 
 win2016_compute_nodes: "{{ groups['win2016-compute'] }}"
 devstack_ip: "{{ groups['devstack'][0] }}"
-
-eventlogPath: "{{ win_dir.event_log }}"
-eventlogcsspath: "{{ win_dir.event_log }}\\eventlogcss.txt"
-eventlogjspath: "{{ win_dir.event_log }}\\eventlogjs.txt"
