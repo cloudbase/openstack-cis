@@ -38,6 +38,7 @@
 
   - name: get tags from job_vars
     set_fact: tags={{ vm.tags }}
+    failed_when: False
 
   - name: add debug tag for debug env instances
     set_fact: tags={{ tags + ' debug' }}
