@@ -14,7 +14,7 @@ vms:
     inventory_group: win2016-compute
     additional_params: "ansible_winrm_cert_pem=/home/jenkins-slave/ssl/ssl_winrm.crt ansible_winrm_cert_key_pem=/home/jenkins-slave/ssl/ssl_winrm.key ansible_winrm_transport=certificate ansible_ssh_user=administrator ansible_connection=winrm ansible_winrm_server_cert_validation=ignore ansible_ssh_port=5986"
     userdata: "{{ lookup('file', '/home/jenkins-slave/ssl/ssl_winrm.crt') }}"
-    tags: "hv-{{ zuul_project | basename }}-{{ zuul_change }}-{{ zuul_patchset }}-{{ job_type }} "
+    tags: "hv-{{ zuul_project | basename }}-{{ zuul_change }}-{{ zuul_patchset }}-{{ job_type }}"
 
 win_crt: /home/jenkins-slave/ssl/ssl_winrm.crt
 win_key: /home/jenkins-slave/ssl/ssl_winrm.key
