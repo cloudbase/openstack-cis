@@ -38,6 +38,6 @@
 
   - name: Add debug tag for debug env instances
     shell: |
-      nova server-tag-set {{ vm_create_out.id }} {{ vm.tags }}
+      nova server-tag-set {{ vm_create_out.id }} {{ vm.tags }}-debug
     when: debug_job
     failed_when: False
