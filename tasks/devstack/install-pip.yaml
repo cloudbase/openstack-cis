@@ -8,10 +8,10 @@
     copy:
       dest: "/tmp/constraints.txt"
       content: |
-        pip==9.0.1
+        {{ pip_version }}
 
   - name: Install pip version {{ pip_version }}
-    shell: "{{ item }} /tmp/get-pip.py -c /tmp/constraints.txt {{ pip_version }}"
+    shell: "{{ item }} /tmp/get-pip.py -c /tmp/constraints.txt pip"
     become: True
     with_items:
       - python2.7
