@@ -36,16 +36,16 @@
         dest: "{{ log_path }}/jenkins-console.log"
       failed_when: False
 
-    - name: Generate ara static report
-      command: "ara generate html {{ log_path }}/ara-report"
-      failed_when: False
-
     - name: Archive all files in {{ log_path }}
       shell: |
         for file in $(find "{{ log_path }}" -type f)
         do 
             gzip $file
         done
+      failed_when: False
+
+    - name: Generate ara static report
+      command: "ara generate html {{ log_path }}/ara-report"
       failed_when: False
 
     - name: Set log destination for debug job
