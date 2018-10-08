@@ -37,7 +37,8 @@
       failed_when: False
 
     - name: Generate ara static report
-      command: "ara generate html {{ log_path }}/ara"
+      shell: |
+        "ara generate html {{ log_path }}/ara"
       failed_when: False
 
     - name: Archive all files in {{ log_path }}
