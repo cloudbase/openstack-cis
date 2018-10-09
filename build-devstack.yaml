@@ -60,14 +60,7 @@
       become: True
       tags: cherry-pick
 
-##    - include: tasks/devstack/install-networking-hyperv.yaml
-## check if task is executed correctly if placed directly in build-devstack play
-    - name: Install networking-hyperv
-      pip:
-        executable: pip2
-        name: -e file:///opt/stack/networking-hyperv
-        extra_args: -c /opt/stack/requirements/upper-constraints.txt
-      become: True
+    - include: tasks/devstack/install-networking-hyperv.yaml
 
     - include: tasks/devstack/write-configs.yaml
 
