@@ -2,7 +2,9 @@
   connection: local
   gather_facts: no
   vars:
-    vlan_range_tool: /home/jenkins-slave/vlan_ranges/vlan_range_tool.py  
+    vlan_range_tool: /home/jenkins-slave/vlan_ranges/vlan_range_tool.py
+  vars_files:
+    - zuul-params.yaml
 
   tasks:
     - name: Alocate a VLAN range for this build
@@ -14,9 +16,11 @@
       retries: 3
       delay: 5
       ignore_errors: yes
+      when: network_type == "hyperv"
 
     - name: Write range to zuul-params.yaml
       lineinfile:
         path: zuul-params.yaml
         regexp: '^vlan_range:'
         line: "vlan_range: {{ vlan_range.stdout_lines[0] }}"
+      when: network_type == "hyperv"
