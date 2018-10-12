@@ -238,3 +238,7 @@
       register: tempest_result
       when: run_tests is not defined or run_tests
       tags: run-tests
+
+    - name: Get all failed tests
+      shell: |
+        grep "FAILED" {{ devstack_dir.home }}/tempest/run-tests.sh.log
