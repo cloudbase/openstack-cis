@@ -287,7 +287,7 @@ post_stack_bash: |
 ##win2016-compute-nova
 join_ad: True
 ### MUST ENSURE THAT openstack/requirements PROJECT IS ALWAYS ON THE FIRST POSITION in git_prep_projects VARIABLE
-git_prep_projects:
+win_git_prep_projects:
   - openstack/requirements
   - openstack/nova
   - openstack/neutron
