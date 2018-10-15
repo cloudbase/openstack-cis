@@ -284,7 +284,7 @@ post_stack_bash: |
     iniset /etc/nova/nova_cell1.conf api_database connection mysql+pymysql://root:Passw0rd@127.0.0.1/nova_api?charset=utf8
     sudo systemctl restart devstack@n-cond-cell1
 
-##win2016-compute-nova
+## win2016-compute-nova
 join_ad: True
 ### MUST ENSURE THAT openstack/requirements PROJECT IS ALWAYS ON THE FIRST POSITION in git_prep_projects VARIABLE
 win_git_prep_projects:

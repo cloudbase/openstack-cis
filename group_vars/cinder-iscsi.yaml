@@ -228,7 +228,7 @@ tempest_tests:
 ## win2016-compute-cinder-isci
 join_ad: False
 
-git_prep_projects:
+win_git_prep_projects:
   - openstack/requirements
   - openstack/nova
   - openstack/neutron
@@ -259,13 +259,13 @@ services:
     template: cinder-backup.conf
 
 
-cherry_picks:
+win_cherry_picks:
   - project: openstack/neutron
     path: "{{ win_dir.build }}\\neutron"
     patches:
       - refs/changes/21/567621/13
 
-python_packages:
+win_python_packages:
   - pymysql
   - ovs
 
