@@ -16,11 +16,9 @@
       retries: 3
       delay: 5
       ignore_errors: yes
-      when: network_type == "hyperv"
 
     - name: Write range to zuul-params.yaml
       lineinfile:
         path: zuul-params.yaml
         regexp: '^vlan_range:'
         line: "vlan_range: {{ vlan_range.stdout_lines[0] }}"
-      when: network_type == "hyperv"

@@ -16,4 +16,3 @@
       retries: 3
       delay: 5
       ignore_errors: yes
-      when: network_type == "hyperv"
