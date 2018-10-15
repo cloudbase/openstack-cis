@@ -317,7 +317,7 @@ vif_plugging_is_fatal: "true"
 vif_plugging_timeout: 60
 
 ## commented cherry pick used only for master branch
-cherry_picks:
+win_cherry_picks:
   - project: openstack/neutron
     path: "{{ win_dir.build }}\\neutron"
     patches:
