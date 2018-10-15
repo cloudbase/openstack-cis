@@ -330,7 +330,7 @@ vmswitches:
     subnet: "{{ data_network }}"
     management: False
 
-python_packages:
+win_python_packages:
   - ovs
 
 data_bridge_ovs: br-ethernet
