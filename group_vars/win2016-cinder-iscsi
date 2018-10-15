@@ -1,1 +1,1 @@
-volume_driver: cinder.volume.drivers.windows.windows.WindowsDriver
+# volume_driver: cinder.volume.drivers.windows.windows.WindowsDriver
