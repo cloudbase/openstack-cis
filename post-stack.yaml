@@ -172,7 +172,7 @@
 
   tasks:
     - name: Include variables from job_vars/{{ zuul_project | basename }}.yaml
-      include_vars: "group_vars/{{ zuul_project | basename }}.yaml"
+      include_vars: "job_vars/{{ zuul_project | basename }}.yaml"
       failed_when: False
       tags: always 
 
