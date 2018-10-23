@@ -1,2 +1,0 @@
-# volume_driver: cinder.volume.drivers.windows.smbfs.WindowsSmbfsDriver
-# smbshare: 'c:\smbshare'
