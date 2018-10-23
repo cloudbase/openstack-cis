@@ -3,8 +3,6 @@
   gather_facts: no
   vars:
     vlan_range_tool: /home/jenkins-slave/vlan_ranges/vlan_range_tool.py
-  vars_files:
-    - zuul-params.yaml
 
   tasks:
     - name: Alocate a VLAN range for this build
