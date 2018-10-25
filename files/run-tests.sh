@@ -112,5 +112,4 @@ exit_code=$?
 popd
 
 echo "Exit code: $exit_code"
-grep "FAILED" $TEMPEST_LOGS_FOLDER/run-tests.sh.log
 exit $exit_code
