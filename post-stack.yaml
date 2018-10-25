@@ -234,8 +234,7 @@
         --included-tests {{ devstack_dir.home }}/included-tests.txt \
         --excluded-tests {{ devstack_dir.home }}/excluded-tests.txt \
         --isolated-tests {{ devstack_dir.home }}/isolated-tests.txt \
-        > {{ devstack_dir.home }}/tempest/run-tests.sh.log && \
-        grep "FAILED" {{ devstack_dir.home }}/tempest/run-tests.sh.log
+        > {{ devstack_dir.home }}/tempest/run-tests.sh.log
       register: tempest_result
       when: run_tests is not defined or run_tests
       tags: run-tests
