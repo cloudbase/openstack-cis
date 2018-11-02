@@ -5,8 +5,8 @@ echo "Before updating nova flavors:"
 openstack flavor list
 
 nova flavor-delete 42 || echo "Flavor 42 not found"
-nova flavor-delete 84 || echo "Flavor 42 not found"
-nova flavor-delete 451 || echo "Flavor 42 not found"
+nova flavor-delete 84 || echo "Flavor 84 not found"
+nova flavor-delete 451 || echo "Flavor 451 not found"
 
 nova flavor-create m1.nano 42 256 1 1
 nova flavor-create m1.micro 84 256 2 1
