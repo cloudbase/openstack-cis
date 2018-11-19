@@ -15,12 +15,6 @@
       failed_when: False
       tags: always
 
-#    - name: Include variables from job_vars/devstack-{{ zuul_project | basename }}-{{ network_type }}
-#      include_vars: "job_vars/devstack-{{ zuul_project | basename }}-{{ network_type }}"
-#      when: network_type is defined and job_type is not defined
-#      failed_when: False
-#      tags: always
-
     - name: Set persistent saving for journald
       ini_file:
         path: /etc/systemd/journald.conf

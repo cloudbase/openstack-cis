@@ -15,12 +15,6 @@
       when: job_type is defined
       tags: always
 
-#    - name: Include variables from job_vars/{{ zuul_project | basename }}-{{ network_type }}.yaml
-#      include_vars: "job_vars/{{ zuul_project | basename }}-{{ network_type }}.yaml"
-#      failed_when: False
-#      when: job_type is not defined and network_type is defined
-#      tags: always
-
     - include: tasks/boot-instance.yaml
       with_items: "{{ vms }}"
       loop_control:

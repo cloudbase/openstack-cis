@@ -16,12 +16,6 @@
       failed_when: False
       tags: always
 
-#    - name: Include variables from job_vars/{{ zuul_project | basename }}-{{ network_type }}.yaml
-#      include_vars: "job_vars/{{ zuul_project | basename }}-{{ network_type }}.yaml"
-#      when: job_type is not defined and network_type is defined
-#      failed_when: False
-#      tags: always
-
     - name: Configure compute node trunk
       include_tasks: tasks/configure-compute-trunk.yaml
       with_items: "{{ groups['all'] }}"
@@ -89,12 +83,6 @@
       failed_when: False
       tags: always
 
-#    - name: Include additional variables based on project network_type
-#      include_vars: "job_vars/{{ zuul_project | basename }}-{{ network_type }}.yaml"
-#      when: job_type is not defined and network_type is defined
-#      failed_when: False
-#      tags: always
-
     - include: tasks/windows/join-ad.yaml
       when: join_ad is defined and join_ad
 
@@ -154,12 +142,6 @@
       failed_when: False
       tags: always
 
-#    - name: Include additional variables based on project network_type
-#      include_vars: "job_vars/{{ zuul_project | basename }}-{{ network_type }}.yaml"
-#      when: job_type is not defined and network_type is defined
-#      failed_when: False
-#      tags: always
-
     - include: tasks/windows/configure-ad-delegation.yaml
       with_items: "{{ win2016_compute_nodes }}"
       loop_control:
@@ -181,12 +163,6 @@
       when: job_type is defined
       failed_when: False
       tags: always
-
-#    - name: Include network_type specific variables
-#      include_vars: "job_vars/{{ zuul_project | basename }}-{{ network_type }}.yaml"
-#      when: job_type is not defined and network_type is defined
-#      failed_when: False
-#      tags: always
 
     - include: tasks/devstack/check-devstack-nova-services.yaml
     - include: tasks/devstack/check-devstack-neutron-services.yaml

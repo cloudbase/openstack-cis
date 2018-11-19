@@ -19,12 +19,6 @@
       failed_when: False
       tags: always
 
-#    - name: Include variables from job_vars/{{ zuul_project | basename }}-{{ network_type }}.yaml
-#      include_vars: "job_vars/{{ zuul_project | basename }}-{{ network_type }}.yaml"
-#      when: network_type is defined and job_type is not defined
-#      failed_when: False
-#      tags: always
-
     - name: Export logs to {{ devstack_dir.stack }}/logs using journalctl
       shell: |
         for u in $(sudo systemctl list-unit-files | grep devstack | awk '{print $1}'); do
