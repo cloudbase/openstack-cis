@@ -63,5 +63,5 @@
     win_copy:
       dest: "{{ win_dir.log }}\\cherry-picks.log"
       content: '{{ cherry_pick_output | to_nice_json }}'
-    when: cherry_picks is defined
+    when: win_cherry_picks is defined
     tags: cherry-pick
