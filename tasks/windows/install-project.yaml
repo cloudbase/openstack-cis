@@ -26,6 +26,12 @@
     when: project_name != "openstack_requirements"
     tags: install-project
 
+### networking-hyperv will install a newer neutron version if not forced the installed version from neutron repository
+  - name: "Ensure networking-hyperv use the proper version of neutron for rocky release"
+    win_shell: 'edit-constraints {{ win_dir.build }}\\requirements\\upper-constraints.txt -- {{ project_name }} "-e file:///C:/openstack/build/neutron#egg=neutron"'
+    when: project_name == "networking-hyperv"
+    tags: install-project
+
   - name: "Installing {{ project_name }} from {{ project_folder }}"
     win_shell: "pip install -c {{ win_dir.build }}\\requirements\\upper-constraints.txt -U -e {{ project_folder }}"
     register: pip_install_output
