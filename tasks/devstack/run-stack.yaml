@@ -6,13 +6,6 @@
     become: True
     failed_when: False
 
-## replace amqp version from 2.4.0 to 2.3.2
-  - name: Change amqp version from 2.4.0 to 2.3.2
-    replace:
-      dest: "{{ devstack_dir.stack }}/requirements/upper-constraints.txt"
-      regexp: '(^amqp+.*)'
-      replace: 'amqp===2.3.2'
-
   - name: Run stack
     shell: |
       ./unstack.sh > /dev/null 2>&1
