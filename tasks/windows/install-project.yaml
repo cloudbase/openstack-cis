@@ -22,7 +22,7 @@
 #    tags: install-project
 
   - name: "Running edit-constraints for {{ project_name }} in {{ project_folder }}"
-    win_shell: 'edit-constraints {{ win_dir.build }}\\requirements\\upper-constraints.txt -- {{ project_name }} ""'
+    win_shell: 'edit-constraints {{ win_dir.build }}\\requirements\\upper-constraints.txt -- {{ project_name }} "-e file:///{{ projects_repo_directory }}/{{ project_name }}#egg={{ project_name }}"'
     when: project_name != "openstack_requirements"
     tags: install-project
 
