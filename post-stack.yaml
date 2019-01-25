@@ -224,17 +224,18 @@
           path: "{{ win_dir.log }}\\{{ neutron_agent_type }}.log"
         register: neutron_log_stat
 
-      - name: "Run {{ neutron_agent_type }} binary"
-        win_shell: |
-          "{{ neutron_binary }}"
-        register: output
-        when: neutron_log_stat.stat.exists == False
+      - name: "Create {{ neutron_agent_type }}-traceback.log file"
+        win_file:
+          path: "{{ win_dir.log }}\\{{ neutron_agent_type }}-traceback.log"
+          state: touch
 
-      - name: "Copy traceback in new log file"
-        win_copy:
-          dest: "{{ win_dir.log }}\\{{ neutron_agent_type }}-traceback.log"
-          content: "{{ output }}"
+      - name: "Run {{ neutron_agent_type }} binary"
+        args:
+          executable: cmd
+        win_shell: |
+          "{{ neutron_binary }} --config-file {{ neutron_config }} 2> {{ win_dir.log}}\\{{ neutron_agent_type }}-traceback.log"
         when: neutron_log_stat.stat.exists == False
+        ignore_errors: True
 
       - fail:
           msg: "Neutron agents are down!"
