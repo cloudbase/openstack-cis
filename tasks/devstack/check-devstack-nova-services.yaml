@@ -21,7 +21,7 @@
       tags: cns
 
     - name: Fail when nova-compute services are down
-      fail:
+      debug:
         msg: "nova-compute services are down"
       when: nova_service_check.rc != 0
       tags: cns
