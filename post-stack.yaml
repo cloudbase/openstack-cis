@@ -224,16 +224,11 @@
           path: "{{ win_dir.log }}\\{{ neutron_agent_type }}.log"
         register: neutron_log_stat
 
-      - name: "Create {{ neutron_agent_type }}-traceback.log file"
-        win_file:
-          path: "{{ win_dir.log }}\\{{ neutron_agent_type }}-traceback.log"
-          state: touch
-
       - name: "Run {{ neutron_agent_type }} binary"
         args:
           executable: cmd
         win_shell: |
-          "{{ neutron_binary }} --config-file {{ neutron_config }} 2> {{ win_dir.log}}\\{{ neutron_agent_type }}-traceback.log"
+          "{{ neutron_binary }} --config-file {{ neutron_config }} > {{ win_dir.log }}\\{{ neutron_agent_type }}-stdout.log 2> {{ win_dir.log }}\\{{ neutron_agent_type }}-stderr.log"
         when: neutron_log_stat.stat.exists == False
         ignore_errors: True
 
@@ -242,6 +237,37 @@
       when: neutron_service_check[0].rc != 0
       tags: cns
 
+    - block:
+      - name: check services
+        debug: var=services[0]
+
+      - name: Set additional variables for nova service
+        set_fact:
+          nova_service: "{{ item.name }}"
+          nova_binary: "{{ item.binary }}"
+          nova_config: "nova.conf"
+        loop: "{{ services }}"
+        loop_control:
+          index_var: service_index
+        when: services[service_index].name == 'nova-compute'
+
+      - name: "Check if {{ nova_service }}.log exists"
+        win_stat:
+          path: "{{ win_dir.log }}\\{{ nova_service }}.log"
+        register: nova_log_stat
+
+      - name: "Run {{ nova_binary }} binary"
+        args:
+          executable: cmd
+        win_shell: |
+          "{{ nova_binary }} --config-file {{ nova_config }} > {{ win_dir.log }}\\{{ nova_service }}-stdout.log 2> {{ win_dir.log }}\\{{ nova_service }}-stderr.log"
+        when: nova_log_stat.stat.exists == False
+        ignore_errors: True
+
+      - fail:
+          msg: "nova-compute services are down!"
+      when: nova_service_check[0].rc != 0
+      tags: cns
 
 - hosts: devstack
   vars_files: 
