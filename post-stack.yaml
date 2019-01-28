@@ -239,7 +239,7 @@
         set_fact:
           nova_service: "{{ item.name }}"
           nova_binary: "{{ item.binary }}"
-          nova_config: "nova.conf"
+          nova_config: "{{ item.config }}"
         loop: "{{ services }}"
         loop_control:
           index_var: service_index
