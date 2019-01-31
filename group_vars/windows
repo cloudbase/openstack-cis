@@ -40,9 +40,6 @@ neutron_hyperv_agent:
     template: neutron-hyperv-agent.conf
 
 win_upper_constraints_pinning:
-  - os-vif:
-    project: 'os-vif'
-    value: 'os-vif===1.11.0'
   - olsorootwrap:
     project: 'oslo.rootwrap'
     value: 'oslo.rootwrap===5.14.0'
