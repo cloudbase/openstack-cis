@@ -28,5 +28,5 @@
       when: neutron_log_stat.stat.exists == False
       ignore_errors: True
 
-    - debug:
+    - fail:
         msg: "Neutron agents are down!"
