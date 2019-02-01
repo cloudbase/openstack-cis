@@ -177,7 +177,7 @@
   tasks:
     - name: Include additional variables based on project
       include_vars: "job_vars/{{ zuul_project | basename }}.yaml"
-      failed_when: False 
+      failed_when: False
       tags: always
 
     - name: Include additional variables based on project job_type
@@ -199,123 +199,14 @@
         cinder_service_check: "{{ groups['devstack'] | map('extract', hostvars, 'cinder_service_check') | list}}"
       when: zuul_project == "openstack/cinder" or zuul_project == "openstack/os-brick"
 
-    - block:
-      - name: Set additional variables if network_type == ovs
-        set_fact:
-          neutron_agent_type: "{{ item.name }}"
-          neutron_binary: "{{ item.binary }}"
-          neutron_config: "{{ item.config }}"
-        with_items: "{{ neutron_ovs_agent }}"
-        when: network_type == "ovs"
-
-      - name: Set additional variables if network_type == hyperv
-        set_fact:
-          neutron_agent_type: "{{ item.name }}"
-          neutron_binary: "{{ item.binary }}"
-          neutron_config: "{{ item.config }}"
-        with_items: "{{ neutron_hyperv_agent }}"
-        when: network_type == "hyperv"
-
-      - name: "Check if {{ neutron_agent_type }}.log is present"
-        win_stat:
-          path: "{{ win_dir.log }}\\{{ neutron_agent_type }}.log"
-          get_checksum: False
-        register: neutron_log_stat
-
-      - name: "Run {{ neutron_agent_type }} binary"
-        args:
-          executable: cmd
-        win_shell: |
-          "{{ neutron_binary }} --config-file {{ neutron_config }} > {{ win_dir.log }}\\{{ neutron_agent_type }}-stdout.log 2> {{ win_dir.log }}\\{{ neutron_agent_type }}-stderr.log"
-        when: neutron_log_stat.stat.exists == False
-        ignore_errors: True
-
-      - fail:
-          msg: "Neutron agents are down!"
+    - include: tasks/windows/collect-traceback-neutron-services.yaml
       when: neutron_service_check[0].rc != 0
 
-    - block:
-      - name: Set additional variables for nova service
-        set_fact:
-          nova_service: "{{ item.name }}"
-          nova_binary: "{{ item.binary }}"
-          nova_config: "{{ item.config }}"
-        loop: "{{ services }}"
-        loop_control:
-          index_var: service_index
-        when: services[service_index].name == 'nova-compute'
-
-      - name: "Check if {{ nova_service }}.log exists"
-        win_stat:
-          path: "{{ win_dir.log }}\\{{ nova_service }}.log"
-          get_checksum: False
-        register: nova_log_stat
-
-      - name: "Run {{ nova_binary }} binary"
-        args:
-          executable: cmd
-        win_shell: |
-          "{{ nova_binary }} --config-file {{ nova_config }} > {{ win_dir.log }}\\{{ nova_service }}-stdout.log 2> {{ win_dir.log }}\\{{ nova_service }}-stderr.log"
-        when: nova_log_stat.stat.exists == False
-        ignore_errors: True
-
-      - fail:
-          msg: "nova-compute services are down!"
+    - include: tasks/windows/collect-traceback-nova-services.yaml
       when: nova_service_check[0].rc != 0
 
-    - block:
-      - name: Set additional variables for cinder-volume service
-        set_fact:
-          cinder_volume_service: "{{ item.name }}"
-          cinder_volume_binary: "{{ item.binary }}"
-          cinder_volume_config: "{{ item.config }}"
-        loop: "{{ services }}"
-        loop_control:
-          index_var: service_index
-        when: services[service_index].name == 'cinder-volume'
-
-      - name: "Check if {{ cinder_volume_service }} log exists"
-        win_stat:
-          path: "{{ win_dir.log }}\\cinder.log"
-          get_checksum: False
-        register: cinder_volume_log_stat
-
-      - name: "Run {{ cinder_volume_binary }} binary"
-        args:
-          executable: cmd
-        win_shell: |
-          "{{ cinder_volume_binary }} --config-file {{ cinder_volume_config }} > {{ win_dir.log}}\\{{ cinder_volume_service }}-stdout.log 2> {{ win_dir.log }}\\{{ cinder_volume_service }}-stderr.log"
-        when: cinder_volume_log_stat.stat.exists == False
-        ignore_errors: True
-
-      - name: Set additional variables for cinder-backup service
-        set_fact:
-          cinder_backup_service: "{{ item.name }}"
-          cinder_backup_binary: "{{ item.binary }}"
-          cinder_backup_config: "{{ item.config }}"
-        loop: "{{ services }}"
-        loop_control:
-          index_var: service_index
-        when: services[service_index].name == 'cinder-backup'
-
-      - name: "Check if {{ cinder_backup_service }}.log exists"
-        win_stat:
-          path: "{{ win_dir.log }}\\{{ cinder_backup_service }}.log"
-          get_checksum: False
-        register: cinder_backup_log_stat
-
-      - name: "Run {{ cinder_backup_binary }} binary"
-        args:
-          executable: cmd
-        win_shell: |
-          "{{ cinder_backup_binary }} --config-file {{ cinder_backup_config }} > {{ win_dir.log}}\\{{ cinder_backup_service }}-stdout.log 2> {{ win_dir.log }}\\{{ cinder_backup_service }}-stderr.log"
-        when: cinder_backup_log_stat.stat.exists == False
-        ignore_errors: True
-
-      - fail:
-          msg: "cinder-volume services are down!"
+    - include: tasks/windows/collect-traceback-cinder-services.yaml
       when: (zuul_project == "openstack/cinder" or zuul_project == "openstack/os-brick") and cinder_service_check[0].rc != 0
-      tags: cns
 
 - hosts: devstack
   vars_files: 
