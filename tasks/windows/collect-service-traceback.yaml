@@ -1,0 +1,35 @@
+   - name: "Set additional variables for service {{ item.name }}"
+     set_fact:
+       service_name: "{{ item.name }}"
+       service_binary: "{{ item.binary }}"
+       service_config: "{{ item.config }}"
+     tags: check-services-tag
+
+   - name: "Check if {{ service_name }}.log exists"
+     win_stat:
+       path: "{{ win_dir.log }}\\{{ service_name }}.log"
+       get_checksum: False
+     register: log_stat
+     tags: check-services-tag
+
+   - name: "Run {{ service_name }} binary"
+     args:
+       executable: cmd
+     win_shell: |
+       "{{ service_binary }} --config-file {{ service_config }} > {{ win_dir.log }}\\{{ service_name }}-stdout.log 2> {{ win_dir.log }}\\{{ service_name }}-stderr.log"
+     when: log_stat.stat.exists == False
+     ignore_errors: True
+     tags: check-services-tag
+
+   - name: "Fail if {{ service_name }} is down"
+     fail:
+       msg: "{{ service_name }} service is down!"
+     when: log_stat.stat.exists == False
+     tags: check-services-tag
+
+
+   ## will be removed; just for testing
+   # - name: "Get {{ service_name }} status"
+   #   win_shell: 'Get-Service {{ service_name }} | %{$_.Status}'
+   #   register: service_status
+   ##  tags: check-services-tag
