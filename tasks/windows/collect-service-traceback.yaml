@@ -1,33 +1,26 @@
-   - name: "Set additional variables for service {{ item.name }}"
-     set_fact:
-       service_name: "{{ item.name }}"
-       service_binary: "{{ item.binary }}"
-       service_config: "{{ item.config }}"
-     tags: check-services-tag
-
-   - name: "Check if {{ service_name }}.log exists"
+   - name: "Check if {{ item.name }}.log exists"
      win_stat:
-       path: "{{ win_dir.log }}\\{{ service_name }}.log"
+       path: "{{ win_dir.log }}\\{{ item.name }}.log"
        get_checksum: False
      register: log_stat
      tags: check-services-tag
 
-   - name: "Get {{ service_name }} status"
-     win_shell: 'Get-Service {{ service_name }} | %{$_.Status}'
+   - name: "Get {{ item.name }} status"
+     win_shell: 'Get-Service {{ item.name }} | %{$_.Status}'
      register: service_status
      tags: check-services-tag
 
-   - name: "Run {{ service_name }} binary"
+   - name: "Run {{ item.name }} binary"
      args:
        executable: cmd
      win_shell: |
-       "{{ service_binary }} --config-file {{ service_config }} > {{ win_dir.log }}\\{{ service_name }}-stdout.log 2> {{ win_dir.log }}\\{{ service_name }}-stderr.log"
+       "{{ item.binary }} --config-file {{ item.config }} > {{ win_dir.log }}\\{{ item.name }}-stdout.log 2> {{ win_dir.log }}\\{{ item.name }}-stderr.log"
      when: log_stat.stat.exists == False
      ignore_errors: True
      tags: check-services-tag
 
-   - name: "Fail if {{ service_name }} is down"
+   - name: "Fail if {{ item.name }} is down"
      fail:
-       msg: "{{ service_name }} service is down!"
+       msg: "{{ item.name }} service is down!"
      when: service_status.stdout_lines[0] == "Stopped"
      tags: check-services-tag
