@@ -12,6 +12,11 @@
      register: log_stat
      tags: check-services-tag
 
+   - name: "Get {{ service_name }} status"
+     win_shell: 'Get-Service {{ service_name }} | %{$_.Status}'
+     register: service_status
+     tags: check-services-tag
+
    - name: "Run {{ service_name }} binary"
      args:
        executable: cmd
@@ -24,12 +29,5 @@
    - name: "Fail if {{ service_name }} is down"
      fail:
        msg: "{{ service_name }} service is down!"
-     when: log_stat.stat.exists == False
+     when: service_status.stdout_lines[0] == "Stopped"
      tags: check-services-tag
-
-
-   ## will be removed; just for testing
-   # - name: "Get {{ service_name }} status"
-   #   win_shell: 'Get-Service {{ service_name }} | %{$_.Status}'
-   #   register: service_status
-   ##  tags: check-services-tag
