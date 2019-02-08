@@ -211,10 +211,6 @@
       set_fact: services={{ services + neutron_ovs_agent }}
       when: network_type == "ovs"
       tags: check-services-tag
-## debug task - need to be removed
-    - name: Get all services on compute node
-      debug: msg={{ services }}
-      tags: check-services-tag
 
     - include: tasks/windows/collect-service-traceback.yaml
       with_items: "{{ services }}"
