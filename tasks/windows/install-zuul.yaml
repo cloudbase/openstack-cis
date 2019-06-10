@@ -1,6 +1,9 @@
 ---
-  - name: Install zuul version "{{ zuul_version }} using {{ zuul_cloner_python }}"
-    win_shell: "{{ zuul_cloner_python }}\\scripts\\pip install {{ zuul_version }}"
+
+  - name: Install zuul version "{{ zuul_version }}"
+    win_shell: "pip install {{ zuul_version }}"
     args:
-        creates: "{{ zuul_cloner_python }}\\scripts\\zuul-cloner.exe"
+        creates: "{{ win_dir.python }}\\scripts\\zuul-cloner.exe"
     tags: install-zuul
+
+

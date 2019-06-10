@@ -1,34 +1,27 @@
 ---
-  - name: "Check if python archive {{ win_dir.tmp }}\\{{ item.archive | urlsplit('path') | basename }} is present"
+  - name: Check if python archive is present
     win_stat:
-      path: "{{ win_dir.tmp }}\\{{ item.archive | urlsplit('path') | basename }}"
+      path: "{{ win_dir.tmp }}\\python.zip"
     register: python_zip
     tags: install-python
 
-  - name: Download python archive {{ item.archive }}
+  - name: Download python archive
     win_get_url:
-      url: "{{ item.archive }}"
-      dest: "{{ win_dir.tmp }}\\{{ item.archive | urlsplit('path') | basename }}"
+      url: "{{ win_python_archive_url }}"
+      dest: "{{ win_dir.tmp }}\\python.zip"
     when: python_zip.stat.exists == False     
     tags: install-python
 
-  - name: Create folder "{{ item.unzip_path }}"
-    win_file:
-      path: "{{ item.unzip_path }}"
-      state: directory
-    tags: install-python
-
-  - name: "Unzip {{ win_dir.tmp }}\\{{ item.archive | urlsplit('path') | basename }} to {{ item.unzip_path }}"
+  - name: Unzip python archive
     cb_unzip:
-      src: "{{ win_dir.tmp }}\\{{ item.archive | urlsplit('path') | basename }}"
-      dest: "{{ item.unzip_path }}"
+      src: "{{ win_dir.tmp }}\\python.zip"
+      dest: "{{ win_dir.python  }}"
     tags: install-python
 
   - name: Add python to PATH
     cb_path:
       elements:
-      - "{{ item.unzip_path }}"
-      - "{{ item.unzip_path }}\\scripts"
+      - "{{ win_dir.python }}"
+      - "{{ win_dir.python }}\\scripts"
       state: present
-    when: item.add_to_path
     tags: install-python

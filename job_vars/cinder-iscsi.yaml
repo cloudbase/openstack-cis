@@ -227,16 +227,6 @@ tempest_tests:
 ## windows
 join_ad: False
 
-win_python:
-  - python27:
-    archive: http://10.100.0.9/ci/python27.zip
-    unzip_path: 'c:\python27'
-    add_to_path: False
-  - python37:
-    archive: http://10.100.0.9/ci/python37.zip
-    unzip_path: 'c:\python37'
-    add_to_path: True
-
 win_git_prep_projects:
   - openstack/requirements
   - openstack/nova

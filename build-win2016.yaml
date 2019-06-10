@@ -87,8 +87,6 @@
 
     - include: tasks/windows/install-utils.yaml
     - include: tasks/windows/install-python.yaml
-      with_items: "{{ win_python }}"
-
     - include: tasks/windows/install-pip.yaml
     - include: tasks/windows/configure-pip-index.yaml
     - include: tasks/windows/install-git.yaml
