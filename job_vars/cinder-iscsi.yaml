@@ -227,6 +227,21 @@ tempest_tests:
 ## windows
 join_ad: False
 
+win_dir:
+  openstack: 'c:\openstack'
+  bin: 'c:\openstack\bin'
+  log: 'c:\openstack\log'
+  etc: 'c:\openstack\etc'
+  build: 'c:\openstack\build'
+  tmp: 'c:\openstack\tmp'
+  python: 'c:\python37'
+  python_zuul: 'c:\python27'
+  pip: 'C:\ProgramData\pip'
+  instances: 'C:\openstack\instances'
+  event_log: 'c:\openstack\log\event-log'
+
+win_python_archive_url: http://10.100.0.9/ci/python37.zip
+
 win_git_prep_projects:
   - openstack/requirements
   - openstack/nova
@@ -266,6 +281,7 @@ win_cherry_picks:
       - refs/changes/21/567621/13
 
 win_python_packages:
+  - pbr
   - pymysql
   - ovs
 
