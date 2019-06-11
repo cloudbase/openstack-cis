@@ -23,6 +23,18 @@ log_path: /tmp/build_logs/{{ zuul_change }}-{{ zuul_patchset }}/{{ job_type }}
 
 ## devstack
 
+git_prep_projects:
+  - openstack/keystone
+  - openstack/glance
+  - openstack/cinder  
+  - openstack/requirements
+  - openstack/nova
+  - openstack/neutron
+  - openstack/networking-hyperv
+  - openstack/swift
+  - openstack/tempest
+  - openstack/cinder-tempest-plugin
+
 #cherry_picks:
 #  - project: openstack/cinder
 #    path: "{{ devstack_dir.stack }}/cinder"
@@ -94,6 +106,7 @@ local_conf:
   q_ml2_tenant_network_type: vxlan
   image_urls: "{{ image_urls }}"
   append: |
+    LIBS_FROM_GIT=cinder-tempest-plugin
     ATTACH_ENCRYPTED_VOLUME_AVAILABLE=False
     SWIFT_REPLICAS=1
     SWIFT_HASH=66a3d6b56c1f479c8b4e70ab5d2014f6
@@ -210,7 +223,7 @@ tempest_tests:
       tempest.scenario.test_volume_boot_pattern.TestVolumeBootPatternV2.test_volume_boot_pattern
       tempest.thirdparty.boto.test_ec2_instance_run.InstanceRunTest.test_compute_with_volumes
       tempest.thirdparty.boto.test_ec2_volumes
-      tempest.thirdparty.boto.test_ec2_volumes
+      cinder_tempest_plugin
 
   excluded-tests: |
       tempest.api.volume.admin.test_snapshot_manage
@@ -258,6 +271,7 @@ services:
     template: cinder-backup.conf
 
 win_python_packages:
+  - pywin32
   - pymysql
   - ovs
 
