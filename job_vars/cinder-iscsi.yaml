@@ -107,6 +107,7 @@ local_conf:
   q_ml2_tenant_network_type: vxlan
   image_urls: "{{ image_urls }}"
   append: |
+    Q_ML2_PLUGIN_MECHANISM_DRIVERS=openvswitch
     TEMPEST_PLUGINS=/opt/stack/cinder-tempest-plugin
     LIBS_FROM_GIT=cinder-tempest-plugin
     ATTACH_ENCRYPTED_VOLUME_AVAILABLE=False
