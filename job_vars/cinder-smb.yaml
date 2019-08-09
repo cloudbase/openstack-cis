@@ -112,6 +112,7 @@ local_conf:
     SWIFT_REPLICAS=1
     SWIFT_HASH=66a3d6b56c1f479c8b4e70ab5d2014f6
     SWIFT_START_ALL_SERVICES=False
+    USE_PYTHON3=True
 
     [[post-config|$NOVA_CONF]]
     [DEFAULT]
