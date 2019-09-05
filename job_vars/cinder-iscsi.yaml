@@ -312,5 +312,3 @@ vmswitches:
   - name: "{{ data_bridge }}"
     subnet: "{{ data_network }}"
     management: False
-
-ovs_msi_url: http://10.100.0.9/ci/openvswitch-hyperv-installer-2.10.msi

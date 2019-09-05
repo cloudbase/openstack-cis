@@ -316,5 +316,3 @@ vmswitches:
 
 volume_driver: cinder.volume.drivers.windows.smbfs.WindowsSmbfsDriver
 smbshare: 'c:\smbshare'
-ovs_msi_url: http://10.100.0.9/ci/openvswitch-hyperv-installer-2.10.msi
-
