@@ -339,9 +339,10 @@ win_cherry_picks:
       - refs/changes/59/763159/1
 
 compute_driver: hyperv.driver.HyperVDriver
+data_bridge_ovs: br-ethernet
 
 vmswitches:
-  - name: "{{ data_bridge }}"
+  - name: "{{ data_bridge_ovs }}"
     subnet: "{{ data_network }}"
     management: False
 
@@ -366,6 +367,5 @@ win_dir:
 
 win_python_archive_url: http://10.100.0.9/ci/python37.zip
 
-data_bridge_ovs: br-ethernet
 ovs_msi_url: http://10.100.0.9/ci/openvswitch-hyperv-installer-beta-2.12.msi
 win2016_compute_node_ip: "{{ groups['win2016-compute'][0] }}"

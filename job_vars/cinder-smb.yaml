@@ -315,7 +315,7 @@ data_bridge_ovs: br-ethernet
 win2016_compute_node_ip: "{{ groups['win2016-compute'][0] }}"
 
 vmswitches:
-  - name: "{{ data_bridge }}"
+  - name: "{{ data_bridge_ovs }}"
     subnet: "{{ data_network }}"
     management: False
 

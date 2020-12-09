@@ -262,7 +262,7 @@ win_dir:
 win_python_archive_url: http://10.100.0.9/ci/python37.zip
 
 vmswitches:
-  - name: "{{ data_bridge }}"
+  - name: "{{ data_bridge_ovs }}"
     subnet: "{{ data_network }}"
     management: False
 
