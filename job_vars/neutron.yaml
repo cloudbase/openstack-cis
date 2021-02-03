@@ -264,6 +264,7 @@ post_stack_bash: |
     IMAGE_REF=`iniget $TEMPEST_CONFIG compute image_ref`
     iniset $TEMPEST_CONFIG compute image_ref_alt $IMAGE_REF
     iniset $TEMPEST_CONFIG validation image_ssh_user ubuntu
+    iniset $TEMPEST_CONFIG validation image_alt_ssh_user ubuntu
 
     iniset $TEMPEST_CONFIG compute build_timeout 360
     iniset $TEMPEST_CONFIG orchestration build_timeout 360
@@ -348,4 +349,4 @@ win_python_archive_url: http://10.100.0.9/ci/python37.zip
 
 data_bridge_ovs: br-ethernet
 win2016_compute_node_ip: "{{ groups['win2016-compute'][0] }}"
-ovs_msi_url: http://10.100.0.9/ci/openvswitch-hyperv-2.7.0-certified.msi
+ovs_msi_url: http://10.100.0.9/ci/openvswitch-hyperv-installer-beta-2.12.msi
