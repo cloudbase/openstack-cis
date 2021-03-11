@@ -159,13 +159,8 @@ local_conf:
   ip_version: 4
   live_migration: True
   block_migration: True
-  tenant_vlan_range: "{{ vlan_range }}"
   image_urls: "{{ image_urls }}"
-  enable_tenant_vlans: false
-  enable_tenant_tunnels: true
-  q_ml2_tenant_network_type: vxlan
   append: |
-    Q_ML2_PLUGIN_MECHANISM_DRIVERS=openvswitch
     SWIFT_REPLICAS=1
     SWIFT_HASH=66a3d6b56c1f479c8b4e70ab5d2014f6
     SWIFT_START_ALL_SERVICES=False
@@ -281,6 +276,13 @@ services:
     binary: "{{ win_dir.python }}\\scripts\\nova-compute.exe"
     config: "{{ win_dir.etc }}\\nova.conf"
     template: nova.conf
+
+  - neutron:
+    name: neutron-hyperv-agent
+    description: OpenStack Neutron Hyper-V Agent Service
+    binary: "{{ win_dir.python }}\\scripts\\neutron-hyperv-agent.exe"
+    config: "{{ win_dir.etc }}\\neutron-hyperv-agent.conf"
+    template: neutron-hyperv-agent.conf
 
 compute_driver: compute_hyperv.driver.HyperVDriver
 
