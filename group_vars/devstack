@@ -50,8 +50,12 @@ python_packages:
   - netaddr
   - netifaces
 
-## commented upper_constraints_pinning for there is no use of it right now
-##upper_constraints_pinning:
+# commented upper_constraints_pinning for there is no use of it right now
+upper_constraints_pinning:
+  # Note(slupsa): Tempest pinning for victoria
+  - osloutils:
+    project: 'oslo.utils'
+    value: 'oslo.utils===4.7.0'
 
 git_prep_projects:
   - openstack/keystone
