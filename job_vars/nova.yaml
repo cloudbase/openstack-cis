@@ -130,6 +130,7 @@ tempest_tests:
       tempest.api.network.test_networks.NetworksIpV6Test.test_create_delete_subnet_with_allocation_pools
       tempest.api.network.test_networks.NetworksIpV6Test.test_create_delete_subnet_with_default_gw
       tempest.api.network.test_networks.NetworksIpV6Test.test_delete_network_with_subnet
+      tempest.api.compute.admin.test_live_migration
 
 local_conf:
   enable_services:
