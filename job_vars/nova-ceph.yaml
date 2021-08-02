@@ -194,6 +194,7 @@ win_cherry_picks:
     path: "{{ win_dir.build }}\\os-brick"
     patches:
       - refs/changes/03/718403/17
+      - refs/changes/10/803210/1
   - project: openstack/nova
     path: "{{ win_dir.build }}\\nova"
     patches:
