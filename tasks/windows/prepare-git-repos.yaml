@@ -22,6 +22,12 @@
     when: not zuul_head_only or zuul_head_only is not defined
     tags: prepare-git-repos
 
+  - name: "Set ssl backend for git to schannel for opendev repos certs"
+    win_shell: "git config --global http.sslbackend schannel"
+
+  - name: "Workaround for old python version of zuul-cloner, disable git ssl"
+    win_shell: "git config --global http.sslverify false"
+
   # zuul-cloner outputs on stderr, if we redirect 2>&1 the command always fails
   # we disable failure here to be able to write the log file in the next task and fail there if necessary
   - name: Run zuul-cloner
