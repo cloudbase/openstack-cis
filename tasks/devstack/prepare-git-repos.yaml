@@ -40,13 +40,6 @@
     when: not zuul_head_only or zuul_head_only is not defined
     tags: prepare-git-repos
 
-  - name: "Set ssl backend for git to schannel for opendev repos certs"
-    shell: "git config --global http.sslverify false"
-
-  - name: "Set ssl backend for git to schannel for opendev repos certs"
-    shell: "git config --global http.sslverify false"
-    become: true
-
   - name: Run zuul-cloner
     shell: "{{ zuul_cloner_command }}"
     register: zuul_cloner_out
