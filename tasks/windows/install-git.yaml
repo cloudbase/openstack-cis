@@ -22,6 +22,6 @@
   - name: Add git to PATH
     cb_path:
       elements:
-      - "c:\\program files\\git\bin"
+      - "c:\\program files\\git\\bin"
       state: present
     tags: install-git
