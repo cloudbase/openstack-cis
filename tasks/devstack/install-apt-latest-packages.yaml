@@ -1,0 +1,6 @@
+  - name: Upgrade required packages to latest version
+    apt:
+      name: "{{ apt_latest_packages }}"
+      update_cache: yes
+      state: latest
+    become: True
