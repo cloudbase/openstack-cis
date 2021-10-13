@@ -40,6 +40,11 @@ apt_packages:
   - python3-dev
   - libpcre3-dev
 
+
+apt_latest_packages:
+  - git
+  - ca-certificates
+
 apt_packages_remove:
   - python3-httplib2
   - python3-yaml
