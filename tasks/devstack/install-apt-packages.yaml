@@ -7,4 +7,6 @@
     apt:
       name: "{{ apt_packages }}"
       update_cache: yes
+    retries: 3
+    delay: 5
     become: True
