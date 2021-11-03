@@ -3,4 +3,6 @@
       name: "{{ apt_packages_remove }}"
       update_cache: yes
       state: absent
+    retries: 3
+    delay: 5
     become: True
