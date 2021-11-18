@@ -1,6 +1,8 @@
 #!/bin/bash
 set -e
 
+source /home/ubuntu/keystonerc
+
 echo "Before updating nova flavors:"
 openstack flavor list
 
