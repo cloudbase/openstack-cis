@@ -44,7 +44,7 @@ neutron_hyperv_agent:
 win_upper_constraints_pinning:
   - yappi:
     project: 'yappi'
-    value: 'yappi===1.0'
+    value: 'yappi===1.3.3'
 
 win_utils_bin_archive_url: http://10.100.0.9/ci/utils_bin.zip
 win_python_archive_url: http://10.100.0.9/ci/python.zip
