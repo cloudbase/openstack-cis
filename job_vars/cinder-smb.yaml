@@ -232,6 +232,7 @@ win_dir:
   etc: 'c:\openstack\etc'
   build: 'c:\openstack\build'
   tmp: 'c:\openstack\tmp'
+  lock: 'c:\openstack\lock'
   python: 'c:\python37'
   python_zuul: 'c:\python27'
   pip: 'C:\ProgramData\pip'
