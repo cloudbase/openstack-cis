@@ -54,6 +54,7 @@ python_packages:
   - virtualenv
   - netaddr
   - netifaces
+  - importlib-metadata===4.8.2
 
 ## commented upper_constraints_pinning for there is no use of it right now
 ##upper_constraints_pinning:
