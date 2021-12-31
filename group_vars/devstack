@@ -56,6 +56,7 @@ python_packages:
   - virtualenv
   - netaddr
   - netifaces
+  - filelock===3.4.0
 
 ## commented upper_constraints_pinning for there is no use of it right now
 ##upper_constraints_pinning:
