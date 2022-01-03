@@ -13,5 +13,5 @@
         {{ pip_version }}
 
   - name: Install pip version "{{ pip_version }}"
-    win_shell: python "{{ win_dir.tmp }}\\get-pip.py" -c "{{ win_dir.tmp }}\\constraints.txt" pip
+    win_shell: python "{{ win_dir.tmp }}\\get-pip.py" -c "{{ win_dir.tmp }}\\constraints.txt" pip --no-setuptools
     tags: install-pip
