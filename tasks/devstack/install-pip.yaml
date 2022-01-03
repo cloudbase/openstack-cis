@@ -1,3 +1,10 @@
+  # Workaroound for https://github.com/pypa/pip/issues/10742
+  # to make get-pip idempotent
+  - name: Uninstall setuptools
+    shell: pip uninstall setuptools -y
+    become: True
+    ignore_errors: yes
+
   - name: Download get-pip.py from {{ get_pip_url }}
     get_url:
       url: "{{ get_pip_url }}"
