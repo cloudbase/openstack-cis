@@ -44,6 +44,7 @@ cherry_picks:
     url: "https://github.com/cloudbase/devstack"
     patches:
       - refs/heads/neutron-ovs-bridge-arping
+      - refs/heads/get-pip-workaround-setuptools
   - project: openstack/tempest
     path: "{{ devstack_dir.stack }}/tempest"
     patches:

@@ -28,6 +28,7 @@ cherry_picks:
     url: "https://github.com/cloudbase/devstack"
     patches:
       - refs/heads/neutron-ovs-bridge-arping
+      - refs/heads/get-pip-workaround-setuptools
 
 local_conf:
   enable_services:
