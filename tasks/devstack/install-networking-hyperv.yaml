@@ -1,8 +1,7 @@
   - name: Install networking-hyperv
-    pip:
-      #executable: pip2
-      name: /opt/stack/networking-hyperv
-      extra_args: -c /opt/stack/requirements/upper-constraints.txt
-      editable: yes
+    # Explicitly install with environment in shell to keep package editable
+    shell: pip3 install -e /opt/stack/networking-hyperv -c /opt/stack/requirements/upper-constraints.txt
+    environment:
+      SETUPTOOLS_USE_DISTUTILS: stdlib
     become: True
     tags: networking-hyperv
