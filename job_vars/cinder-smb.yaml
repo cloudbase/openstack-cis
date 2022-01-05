@@ -252,10 +252,10 @@ win_git_prep_projects:
   - openstack/requirements
   - openstack/cinder
   - openstack/nova
-  - openstack/neutron
   - openstack/compute-hyperv
-  - openstack/os-win
   - openstack/networking-hyperv
+  - openstack/neutron
+  - openstack/os-win
 
 services:
   - nova:
