@@ -304,13 +304,13 @@ win_dir:
   build: 'c:\openstack\build'
   tmp: 'c:\openstack\tmp'
   lock: 'c:\openstack\lock'
-  python: 'c:\python37'
+  python: 'c:\python38'
   python_zuul: 'c:\python27'
   pip: 'C:\ProgramData\pip'
   instances: 'C:\openstack\instances'
   event_log: 'c:\openstack\log\event-log'
 
-win_python_archive_url: http://10.100.0.9/ci/python37.zip
+win_python_archive_url: http://10.100.0.9/ci/python38.zip
 
 
 data_bridge_ovs: br-ethernet
