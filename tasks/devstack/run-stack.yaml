@@ -18,6 +18,9 @@
       
   - name: Run stack
     shell: |
+      # workaround get-pip breaking when setuptools installed
+      # ref: https://github.com/pypa/pip/issues/10742
+      sudo -H -E pip3 uninstall setuptools -y || true
       ./unstack.sh > /dev/null 2>&1
       ./stack.sh > /dev/null 2>&1
     args:
