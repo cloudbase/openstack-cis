@@ -23,8 +23,12 @@
       backslash: "\\"
     tags: install-project
 
-  - name: "Running edit-constraints for {{ project_name }} in {{ project_folder }}"
-    win_shell: 'edit-constraints {{ win_dir.build }}\\requirements\\upper-constraints.txt -- {{ project_name }} "-e file:///{{ repo_path }}/{{ project_name }}#egg={{ project_name }}"'
+  - name: "Ensure direct reference to {{ project_name }} in pip constraints"
+    win_lineinfile:
+      path: '{{ win_dir.build }}\\requirements\\upper-constraints.txt'
+      regexp: '^{{ project_name }}[^-] *.*(@|<|>|=).*'
+      line: '{{project_name }} @ file:///{{ repo_path }}/{{ project_name }}#egg={{ project_name }}'
+      newline: unix
     when: project_name != "openstack_requirements"
     tags: install-project
 

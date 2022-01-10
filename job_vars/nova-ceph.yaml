@@ -184,10 +184,10 @@ ad_domain: "nc-{{ zuul_change }}-{{ zuul_patchset }}.local"
 win_git_prep_projects:
   - openstack/requirements
   - openstack/nova
-  - openstack/neutron
-  - openstack/os-win
-  - openstack/os-brick
   - openstack/networking-hyperv
+  - openstack/neutron
+  - openstack/os-brick
+  - openstack/os-win
 
 win_cherry_picks:
   - project: openstack/os-brick

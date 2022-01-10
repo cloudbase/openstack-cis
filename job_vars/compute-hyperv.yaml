@@ -310,9 +310,9 @@ win_git_prep_projects:
   - openstack/requirements
   - openstack/nova
   - openstack/compute-hyperv
+  - openstack/networking-hyperv
   - openstack/neutron
   - openstack/os-win
-  - openstack/networking-hyperv
 
 services:
   - nova:
