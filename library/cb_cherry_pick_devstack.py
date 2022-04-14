@@ -24,6 +24,7 @@ def main():
     # make sure we have these set
     Popen("git config --global user.email cbci@cloudbasesolutions.com".split(), stdout=PIPE, stderr=PIPE).communicate()
     Popen("git config --global user.name CBCI".split(), stdout=PIPE, stderr=PIPE).communicate()
+    Popen(("git config --global --add safe.directory %s" % path).split(), stdout=PIPE, stderr=PIPE).communicate()
 
     for r in ref:
         result[r] = dict()
