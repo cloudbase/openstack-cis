@@ -96,9 +96,7 @@ tempest_tests:
       # disable tests until fixed with trunking
       # https://review.opendev.org/c/openstack/tempest/+/774689
       tempest.api.compute.admin.test_live_migration.LiveAutoBlockMigrationV225Test.test_live_migration_with_trunk
-      tempest.api.compute.admin.test_live_migration.LiveAutoBlockMigrationV225Test.test_live_block_migration_with_attached_volume
       tempest.api.compute.admin.test_live_migration.LiveMigrationTest.test_live_migration_with_trunk
-      tempest.api.compute.admin.test_live_migration.LiveMigrationTest.test_live_block_migration_with_attached_volume
 
   isolated-tests: |
       tempest.api.compute.admin.test_servers_negative.ServersAdminNegativeTestJSON.test_resize_server_using_overlimit_ram
